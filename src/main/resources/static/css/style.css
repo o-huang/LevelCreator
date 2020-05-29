@@ -1,0 +1,318 @@
+html, body {
+    height: 100%;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.col {
+    padding: 2%;
+}
+
+.pagination {
+    padding-top: 20px;
+}
+
+.following_username {
+    padding: 10px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.followbutton {
+    text-align: right;
+    padding-right: 50px;
+    padding-top: 10px;
+}
+
+.addButton {
+    height: 428px;
+}
+
+.iconrow {
+    padding-bottom: 30px;
+}
+
+.icon {
+    font-size: 1.9rem;
+}
+
+.myImage {
+    height: 700px;
+}
+
+.test1 {
+    height: 200px;
+}
+
+.box {
+    border: 1px solid #999;
+    border-radius: 3px;
+    height: 900px;
+    width: 100%;
+    overflow: auto;
+    background-color: gray;
+    padding-top: 300px;
+    padding-bottom: 300px;
+}
+
+.canvas-container {
+    margin: 0 auto;
+
+}
+
+
+.tools {
+    border: solid;
+    border-color: #BBF8FC;
+    border-radius: .5rem;
+}
+
+.firstRow {
+    padding: 10px;
+}
+
+.panels {
+    margin-left: 20px;
+}
+
+.card1 {
+    width: 100%
+}
+
+.action-buttons {
+    position: relative;
+}
+
+.tools {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+
+.layerIcon {
+    padding: 10px;
+    color: #1abc9c;
+}
+
+.liItems {
+    padding-left: 5px;
+}
+
+.liInputTag {
+    width: auto;
+}
+
+.typeIcon {
+    padding: 5px;
+}
+
+.propertyIcon {
+    padding-left: 5px;
+}
+
+.liTag {
+    text-align: center;
+}
+
+.canvasPosition {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+#layerList {
+    background: #ebebeb;
+}
+
+.tileSetIcon {
+    padding: 10px;
+    color: #1abc9c;
+}
+
+.infoTab {
+    color: #1abc9c;
+}
+
+#propertyPanelModal {
+    width: 600px;
+    height: 700px;
+}
+
+.propertyModalTitles {
+    background: #337ab7;
+    color: white;
+    padding: 10px;
+}
+
+.propertyModalButtons {
+    border: 2px solid;
+    background: #337ab7;
+    color: white;
+}
+
+.propertyModalFooter {
+    padding: 5px;
+}
+
+.propertyModalBody {
+    padding: 10px;
+}
+
+.setBodySize {
+    padding: 5px;
+    height: 535px;
+}
+
+.propertyListItem {
+    padding: 0px;
+    border-radius: 0px !important;
+}
+
+.propertyTextInput {
+    width: 100%;
+    height: 100%;
+}
+
+.checkBoxAndColorBox {
+    height: 100%;
+}
+
+.propertyRow {
+    margin: 0;
+}
+
+.propertyNameCol {
+    padding: 0px;
+}
+
+.propertyValueCol {
+    padding-right: 0px;
+}
+
+.propertyDeleteCol {
+    padding: 0px;
+    font-size: 25px;
+    padding-left: 10px;
+}
+
+.canvasGird {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.projectCard {
+    width: 18rem;
+    margin: auto;
+}
+
+/*.cardProjectDate {*/
+/*    white-space: nowrap;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*}*/
+
+.cardProjectTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.addProjectCard {
+    width: 18rem;
+    margin: auto;
+    height: 96%;
+}
+
+/*#canvasContainerGrid{*/
+/*    position:absolute;*/
+/*    top:0;bottom:0;right:0;left:0;*/
+/*    margin:auto;*/
+/*}*/
+
+.delButton i{
+
+    float: right;
+}
+
+.comment-wrapper{
+    width: 900px;
+}
+
+.comment-wrapper .card-body {
+    max-height:650px;
+    overflow:auto;
+}
+
+.comment-wrapper .media-list .media img {
+    width:64px;
+    height:64px;
+    border:2px solid #e5e7e8;
+}
+
+.comment-wrapper .media-list .media {
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+}
+
+#proj_sc {
+    border: 1px solid black;
+    height: 500px;
+}
+
+#user_icon {
+    position: relative;
+    top: -27px;
+    left: 20px;
+}
+
+.screenshotImage{
+    height: 300px;
+}
+
+#commentsContainer{
+    padding-top: 50px;
+}
+
+#commentUser{
+    padding-top: 10px;
+}
+
+#postButton{
+    float:right;
+    width: 20%;
+}
+
+#delButton{
+    float: right;
+    margin-right: 200px;
+}
+
+#commentText{
+    resize: none;
+}

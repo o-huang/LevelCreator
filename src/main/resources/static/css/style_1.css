@@ -1,0 +1,127 @@
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    height: 100%;
+}
+.registration, .login, .profile{
+    background-image: url("../images/bg.jpg")
+
+}
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    width: 50%;
+}
+
+.logo-1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    width: 120%; !important
+    flex-shrink: 0;
+}
+
+#row-1{
+    padding: 50px 0px 50px 0px;
+}
+
+#login-col-1{
+
+    padding-right: 100px;
+
+}
+#login-col{
+
+    padding-left: 100px;
+}
+
+html, body, .container {
+    height: 100%;
+}
+.container {
+    padding: 25px;
+    position: center;
+}
+
+.form-login {
+    background-color:#FFFFFF;
+    padding-top: 70px;
+    padding-bottom: 80px;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-radius: 50px;
+    border-style: solid;
+    border-color:#BBF8FC;
+    border-width: 5px;
+}
+
+.form-login-1{
+    background-color:#C0C0C0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 150px;
+    padding-right: 150px;
+    border-radius: 50px;
+    border-style: solid;
+    border-color:#BBF8FC;
+    border-width: 5px;
+
+}
+
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size:30px;
+    color: #000000;
+    border:0 solid #fff;
+    padding-bottom:30px;
+    text-align: center;
+}
+
+.reg-h4{
+    font-family: 'Roboto', sans-serif;
+    font-size:30px;
+    color: #000000;
+    border:0 solid #fff;
+    padding-bottom:30px;
+    text-align: center;
+}
+
+.login-links{
+
+    font-family: 'Roboto', sans-serif;
+    font-size:30px;
+
+}
+
+.row .form-control{
+    font-family: 'Roboto', sans-serif;
+    font-size:20px;
+    border-radius: 15px;
+
+    width: 120%;
+}
+
+.wrapper {
+    text-align: center;
+    padding-top: 40px;
+}
+
+#login-button{
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}
+
+
+
+label {
+    display: inline-block;
+    width: 170px;
+    text-align: left;
+    float: left;
+}​
+
+

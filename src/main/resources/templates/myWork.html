@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymleaf.org/extras/spring-security">
+
+<head th:insert="fragments.html :: headerfiles">
+    <title>LevelCreator - A Collaborative Level Building Tool</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+</head>
+<body>
+
+<div th:insert="fragments.html :: nav"></div>
+
+<!--Create New Poject Button-->
+<div class="container m-2" style="max-width: 100%">
+    <div class="row" th:fragment="list" xmlns:th="http://www.thymeleaf.org">
+        <div class="col-sm-3" style="padding:2%;">
+            <div class="card mb-3 addProjectCard" data-toggle="modal" data-target="#exampleModalCenter">
+                <img src="../images/plus.svg" class="card-img-top addButton" alt="...">
+            </div>
+        </div>
+        <!--The popup model-->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Create A New Map!!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!--                The Input Form-->
+                        <!--/*@thymesVar id="project" type=""*/-->
+                        <!--                        th:onsubmit=""-->
+                        <form id="mapForm" action="addProject" method="POST">
+                            <div class="form-group form-inline">
+                                <label>Orientation:</label>
+                                <select id="orientation" style="padding-left: 10px">
+                                    <option value="Orthogonal">Orthogonal</option>
+                                    <option value="Isometric">Isometric</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="mapWidth">Enter Project Name:</label>
+                                <input type="text" class="form-control" id="projectName" aria-required="true"
+                                       placeholder="Enter project name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mapWidth">Map Width:</label>
+                                <input type="number" step="1" min="1" class="form-control" id="mapWidth"
+                                       placeholder="Enter map width" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mapHeight">Map Height:</label>
+                                <input type="number" step="1" min="1" class="form-control" id="mapHeight"
+                                       placeholder="Enter map height" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tileWidth">Tile Width:</label>
+                                <input type="number" step="1" min="1" max="64" class="form-control" id="tileWidth"
+                                       value="32"
+                                       placeholder="Enter tile width" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tileHeight">Tile Height:</label>
+                                <input type="number" step="1" min="1" max="64" class="form-control" id="tileHeight"
+                                       value="32"
+                                       placeholder="Enter tile height" required>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" id="createMapBtn" class="btn btn-primary">Create Map</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div>-->
+        <!--    <p th:each = "p : ${project}" th:text = "${p.name}" </p>-->
+        <!--</div>-->
+        <!--        <div id="testyProject">-->
+        <div class="col-sm-3" th:each="project, stat: ${projects}" style="padding:2%;">
+            <div class="card mb-3 projectCard">
+                <a th:href="@{'/workspace/'+ ${project.id}}">
+
+                    <img class="card-img-top screenshotImage"  th:src="${project.screenshot}"
+                         th:onclick="loadContent([[${project.id}]],[[${project.mapJSON}]])"/>
+                </a>
+
+                <div class="card-body">
+                    <a th:href="@{'/workspace/'+ ${project.id}}">
+                        <!--                        Title Of Project-->
+                        <h5 class="card-title cardProjectTitle" th:title="${project.name}" th:text="${project.name}"
+                            th:onclick="loadContent([[${project.id}]],[[${project.mapJSON}]])"/>
+                    </a>
+                    <!--                        Last Edited Date-->
+                    <h6 class="text-muted cardProjectDate" th:title="'Last updated at '+ ${project.createdDate}"
+                        th:text="'Last updated at '+ ${project.createdDate.substring(0, 10)}"/>
+
+                    <div>
+                        <!--                        Switch button toggle public or private-->
+                        <div class="custom-control custom-switch"
+                             th:onclick="togglePublic(event,[[${project.id}]])" style="width: 50%;float: left">
+                            <input type="checkbox" class="custom-control-input"
+                                   th:id="'customSwitch' + ${project.id}"
+                                   th:checked="${project.type} ? 'checked'">
+                            <label class="custom-control-label" th:for="'customSwitch'+ ${project.id}"><i
+                                    class="fas fa-globe-americas"></i></label>
+
+                        </div>
+                        <!--                            Delete Button-->
+                        <div>
+                            <i style="float: right"
+                               class="far fa-trash-alt fa-lg" id="deleteTrashCan" th:data-toggle="modal" th:data-target="'#deleteProj' + ${project.id}"></i>
+
+                            <div class="modal fade"  th:id="'deleteProj' + ${project.id}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampldeleteProj" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampldeleteProj">Delete Project</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" style="padding:0px !important; margin: auto;">
+                                            Are you sure you want to delete?
+                                        </div>
+                                        <div class="modal-footer" style="padding:1rem !important;">
+                                            <button type="button" class="btn btn-primary"
+                                                    th:onclick="deleteProject([[${project.id}]])">Yes
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                No
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--            </div>-->
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js"></script>
+<script>
+    document.getElementById("searchBar").setAttribute("action", "/myWork")
+</script>
+
+<!--<script>-->
+<!--    $("#deleteTrashCan").on('click', function () {-->
+<!--        event.stopPropagation();-->
+<!--        event.preventDefault()-->
+<!--        $("#deleteProj").modal()-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    function deleteProject(theProjectID) {
+        event.stopPropagation();
+        event.preventDefault()
+
+        $.ajax({
+            contentType: "application/json",
+            type: "GET",
+            data: JSON.stringify(theProjectID),
+            url: "/myWork/delete/" + theProjectID,
+            success: function (data) {
+                console.log('Deleting Project Was Successful.');
+                window.location = "/myWork";
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('error while deleting Project');
+            }
+        });
+    }
+</script>
+
+<script>
+    function togglePublic(event, theProjectID) {
+        event.stopImmediatePropagation();
+
+        $.ajax({
+            contentType: "application/json",
+            type: "PUT",
+            data: JSON.stringify(theProjectID),
+            url: "/togglePublic",
+            success: function (data) {
+                console.log('Changing type sucessfull');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('error while changing type');
+            }
+        });
+    }
+</script>
+<!-- Optional JavaScript -->
+<!--<script src="js/addProject.js"></script>-->
+<script src="js/fabricCreateMap.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("nav .active").removeClass("active");
+        $("#link-myWork").addClass("active");
+    });
+</script>
+</body>
+</html>
